@@ -25,6 +25,7 @@ class V4Controller(val personRepository: PersonRepository) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Transactional
     fun create(@RequestBody personRequest: PersonRequest) = personRepository.save(
         Person(
             lastname = personRequest.lastName,
@@ -36,6 +37,7 @@ class V4Controller(val personRepository: PersonRepository) {
     )
 
     @PutMapping("{id}")
+    @Transactional
     fun update(@PathVariable("id") id: Long, @RequestBody personRequest: PersonRequest) = personRepository.findById(id)
         .flatMap { person ->
             val newPerson = person.copy(
@@ -49,6 +51,7 @@ class V4Controller(val personRepository: PersonRepository) {
         }
 
     @PutMapping("{id}/change-lastname")
+    @Transactional
     fun updateLastname(@PathVariable("id") id: Long, @RequestParam lastname: String) = personRepository.findById(id)
         .flatMap {
             personRepository.updateLastname(lastname = lastname, id = id)
