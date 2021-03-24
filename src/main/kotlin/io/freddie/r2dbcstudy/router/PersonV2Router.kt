@@ -40,8 +40,8 @@ class PersonV2Router {
                 val id = request.pathVariable("id").toLong()
                 r2dbcEntityTemplate.selectOne(query(where("id").`is`(id)), Person::class.java)
                     .switchIfEmpty(Mono.error(IllegalArgumentException()))
-                    .flatMap { r2dbcEntityTemplate.update(query(where("id").`is`(id)), Update.update("lastname", it.lastName)
-                        .set("firstname", it.firstName)
+                    .flatMap { r2dbcEntityTemplate.update(query(where("id").`is`(id)), Update.update("lastname", it.lastname)
+                        .set("firstname", it.firstname)
                         .set("age", it.age), Person::class.java)
                     }
                     .flatMap { ServerResponse.ok().bodyValue(it) }

@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
 import org.springframework.r2dbc.core.DatabaseClient
-import org.springframework.web.reactive.function.server.RouterFunctions.nest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.router
 import java.time.LocalDateTime
@@ -22,8 +21,8 @@ class PersonV1Router {
                     .map { row ->
                         Person(
                             id = row.get("id", Long::class.java),
-                            firstName = row.get("firstname", String::class.java)!!,
-                            lastName = row.get("lastname", String::class.java)!!,
+                            firstname = row.get("firstname", String::class.java)!!,
+                            lastname = row.get("lastname", String::class.java)!!,
                             age = row.get("age", Int::class.java)!!,
                             email = row.get("email", String::class.java),
                             updatedAt = row.get("updatedAt", LocalDateTime::class.java)!!
