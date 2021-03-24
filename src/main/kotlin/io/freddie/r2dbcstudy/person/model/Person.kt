@@ -1,5 +1,6 @@
 package io.freddie.r2dbcstudy.person.model
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import java.time.LocalDateTime
@@ -11,5 +12,6 @@ data class Person(
     val age: Int,
     val email: String?,
     @Column("updatedAt")
+    @Value("#root.updatedAt")
     val updatedAt: LocalDateTime
 )

@@ -1,6 +1,6 @@
-GET http://localhost:8080/v2/persons?lastname=freddie
+GET http://localhost:8080/v4/persons/3
 ###
-POST http://localhost:8080/v2/persons
+POST http://localhost:8080/v4/persons
 Content-Type: application/json
 
 {
@@ -11,8 +11,9 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/v2/persons/1
+PUT http://localhost:8080/v4/persons/1
 Content-Type: application/json
+
 {
   "firstName": "updated",
   "lastName": "updatedlastname",
@@ -20,5 +21,7 @@ Content-Type: application/json
   "email": "sample@gmail.com"
 }
 
+
 ###
-DELETE http://localhost:8080/v2/persons/1
+PUT http://localhost:8080/v4/persons/1/change-lastname?lastname=newlastname
+Content-Type: application/json
