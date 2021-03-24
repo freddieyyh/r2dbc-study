@@ -25,3 +25,21 @@ Content-Type: application/json
 ###
 PUT http://localhost:8080/v4/persons/1/change-lastname?lastname=newlastname
 Content-Type: application/json
+
+###
+GET http://localhost:8080/v4/jobs/1
+###
+POST http://localhost:8080/v4/jobs
+Content-Type: application/json
+
+{
+  "name": "Scientist"
+}
+
+###
+PUT http://localhost:8080/v4/jobs/1
+Content-Type: application/json
+
+{
+  "name": "Soccer Player"
+}

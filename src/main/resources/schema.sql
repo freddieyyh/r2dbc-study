@@ -10,3 +10,12 @@ create table person
     constraint person_pk
         primary key (id)
 );
+
+drop table if exists job;
+create table job
+(
+    id varchar(36) not null,
+    name varchar(30) not null,
+    constraint job_pk
+        primary key (id)
+);
