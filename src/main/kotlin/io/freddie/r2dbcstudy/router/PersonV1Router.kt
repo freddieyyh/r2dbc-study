@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
 import org.springframework.r2dbc.core.DatabaseClient
+import org.springframework.transaction.ReactiveTransactionManager
+import org.springframework.transaction.reactive.TransactionalOperator
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.router
 import java.time.LocalDateTime
@@ -13,7 +15,9 @@ import java.time.LocalDateTime
 class PersonV1Router {
 
     @Bean
-    fun routePersonV1(databaseClient: DatabaseClient) = router {
+    fun routePersonV1(databaseClient: DatabaseClient, transactionManager: ReactiveTransactionManager) = router {
+        val operator = TransactionalOperator.create(transactionManager)
+
         (accept(MediaType.APPLICATION_JSON) and "/v1").nest {
             GET("/persons") { request ->
                 databaseClient.sql("SELECT * FROM person WHERE lastname = :lastname")
@@ -29,6 +33,7 @@ class PersonV1Router {
                         )
                     }
                     .all()
+                    .`as`(operator::transactional)
                     .collectList()
                     .flatMap {
                         ServerResponse.ok()

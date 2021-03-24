@@ -19,6 +19,3 @@ Content-Type: application/json
   "age": 33,
   "email": "sample@gmail.com"
 }
-
-###
-DELETE http://localhost:8080/v2/persons/1
