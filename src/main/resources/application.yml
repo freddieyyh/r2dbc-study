@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    initialization-mode: always
+    schema-username: root
+    schema-password: 1234
+    schema: data.sql
